@@ -1,0 +1,154 @@
+﻿constants:
+	D3D11_SDK_VERSION 7
+enums:
+	D3D11_BLEND
+	    ZERO			 ?
+	    ONE				 ?
+	    SRC_COLOR		 ?
+	    INV_SRC_COLOR	 ?
+	    SRC_ALPHA		 ?
+	    INV_SRC_ALPHA	 ?
+	    DEST_ALPHA		 ?
+	    INV_DEST_ALPHA	 ?
+	    DEST_COLOR		 ?
+	    INV_DEST_COLOR	 ?
+	    SRC_ALPHA_SAT	 ?
+	    BLEND_FACTOR	 ?
+	    INV_BLEND_FACTOR ?
+	    SRC1_COLOR		 ?
+	    INV_SRC1_COLOR	 ?
+	    SRC1_ALPHA		 ?
+		INV_SRC1_ALPHA   ?
+	;
+	D3D11_BLEND_OP
+		ADD		     ?
+		SUBTRACT	 ?
+		REV_SUBTRACT ?
+		MIN  		 ?
+		MAX			 ?
+	;
+	D3D11_FEATURE_LEVEL
+		_1_0_Core 0x1000
+		_9_1  0x9100
+		_9_2  0x9200
+		_9_3  0x9300
+		_10_0  0xa000
+		_10_1  0xa100
+		_11_0  0xb000
+		_11_1  0xb100
+		_12_0  0xc000
+		_12_1  0xc100
+	;
+	D3D11_USAGE
+        DEFAULT	  0
+        IMMUTABLE 1
+        DYNAMIC	  2
+        STAGING	  3
+    ;
+    D3D11_CREATE_DEVICE_FLAG
+		SINGLETHREADED ?
+		DEBUG ?
+		SWITCH_TO_REF ?
+		PREVENT_INTERNAL_THREADING_OPTIMIZATIONS ?
+		BGRA_SUPPORT ?
+		DEBUGGABLE ?
+		PREVENT_ALTERING_LAYER_SETTINGS_FROM_REGISTRY ?
+		DISABLE_GPU_TIMEOUT ?
+		VIDEO_SUPPORT ?
+    ;
+	D3D11_RESOURCE_DIMENSION
+    {
+        D3D11_RESOURCE_DIMENSION_UNKNOWN	= 0,
+        D3D11_RESOURCE_DIMENSION_BUFFER	= 1,
+        D3D11_RESOURCE_DIMENSION_TEXTURE1D	= 2,
+        D3D11_RESOURCE_DIMENSION_TEXTURE2D	= 3,
+        D3D11_RESOURCE_DIMENSION_TEXTURE3D	= 4
+    } ;
+Methods:
+	HRESULT D3D11CreateDevice 
+		IDXGIAdapter* pAdapter 
+		D3D_DRIVER_TYPE DriverType
+		HMODULE Software
+		D3D11_CREATE_DEVICE_FLAG Flags
+		D3D11_FEATURE_LEVEL* pFeatureLevel
+		uint FeatureLevels
+		uint SDKVersion
+		ID3D11Device** ppDevice
+		D3D11_FEATURE_LEVEL* pFeatureLevel
+		ID3D11DeviceContext** ppImmediateContext
+	;
+Structs:
+
+	D3D11_SUBRESOURCE_DATA
+    {
+		void* pSysMem
+		uint SysMemPitch
+		uint SysMemSlicePitch
+    } ;
+
+	D3D11_BUFFER_DESC
+    {
+		uint ByteWidth
+		D3D11_USAGE Usage
+		uint BindFlags
+		uint CPUAccessFlags
+		uint MiscFlags
+		uint StructureByteStride
+    } ;
+	D3D11_TEXTURE2D_DESC
+    {
+		uint Width
+		uint Height
+		uint MipLevels
+		uint ArraySize
+		DXGI_FORMAT Format
+		DXGI_SAMPLE_DESC SampleDesc
+		D3D11_USAGE Usage
+		uint BindFlags
+		uint CPUAccessFlags
+		uint MiscFlags
+    } ;
+Interfaces:
+
+	[db6f6ddb-ac77-4e88-8253-819df9bbf140]
+	ID3D11Device : IUnknown
+			
+		;
+
+	[1841e5c8-16b0-489b-bcc8-44cfb0d5deae]
+	ID3D11DeviceChild : IUnknown
+			void GetDevice
+				ID3D11Device** ppDevice
+				;
+			HRESULT GetPrivateData
+				REFGUID guid
+				uint* pDataSize
+				void* pData
+				;
+			HRESULT SetPrivateData
+				REFGUID guid
+				uint DataSize
+				IUnknown pData
+				;
+			HRESULT SetPrivateDataInterface
+				REFGUID guid
+				IUnknown* pData
+				;
+		;
+	[dc8e63f3-d12b-4952-b47b-5e45026a862d]
+	ID3D11Resource : ID3D11DeviceChild
+		void GetType
+			D3D11_RESOURCE_DIMENSION pResourceDimension
+			;
+		void SetEvictionPriority
+			uint EvictionPriority
+			;
+		uint GetEvictionPriority
+			;
+		;
+	[6f15aaf2-d208-4e89-9ab4-489535d34f9c]
+	ID3D11Texture2D : ID3D11Resource
+		void GetDesc
+			D3D11_TEXTURE2D_DESC* pDesc
+		;
+	;

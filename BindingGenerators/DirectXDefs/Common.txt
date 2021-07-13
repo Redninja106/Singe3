@@ -1,0 +1,16 @@
+﻿Constants
+Enums
+	
+Methods
+	
+Interfaces:
+	[00000000-0000-0000-C000-000000000046]
+	IUnknown : nothing
+		HRESULT QueryInterface
+			REFIID riid
+			void** ppvObject
+		;
+		ulong AddRef ;
+		ulong Release ;
+	;
+Structs

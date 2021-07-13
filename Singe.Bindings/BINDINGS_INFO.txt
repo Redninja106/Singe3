@@ -1,0 +1,4 @@
+﻿Windows:
+
+These windows bindings were generated using a slightly modified version of https://github.com/microsoft/CsWin32
+

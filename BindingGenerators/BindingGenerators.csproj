@@ -1,0 +1,77 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Bindings\Platforms\Windows.cs" />
+    <Compile Remove="Bindings\Windows\Windows.Win32.cs" />
+    <Compile Remove="DirectX.cs" />
+    <Compile Remove="DirectXDefs\DXGI.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DirectXDefs\Common.txt" />
+    <None Remove="DirectXDefs\D3D.txt" />
+    <None Remove="DirectXDefs\D3D11.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="DirectXDefs\Common.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DirectXDefs\D3D.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DirectXDefs\D3D11.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DirectXDefs\DXGI.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClangSharp" Version="12.0.0-beta1" />
+    <PackageReference Include="ICSharpCode.Decompiler" Version="7.1.0.6543" />
+    <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="10.2.84-preview" />
+    <PackageReference Include="System.CodeDom" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Windows.Win32.Interop.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Windows.Win32.winmd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Bindings\DirectX\Direct3D11\" />
+    <Folder Include="Bindings\OpenGL\" />
+    <Folder Include="Bindings\Vulkan\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Bindings\Platforms\Windows.cs" />
+    <None Include="Bindings\Windows\Windows.Win32.cs" />
+    <None Include="DirectX.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Windows.Win32.winmd">
+      <HintPath>bin\Debug\net5.0\Windows.Win32.winmd</HintPath>
+    </Reference>
+    <Reference Include="Windows.Win32.Interop">
+      <HintPath>bin\Debug\net5.0\Windows.Win32.Interop.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
